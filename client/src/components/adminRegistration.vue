@@ -3,12 +3,12 @@
       <v-flex xs12 sm6 d-flex>
           <div class="white elevation-2">
         <v-toolbar flat dense class="cyan" dark>
-            <v-toolbar-title>Login</v-toolbar-title>    
+            <v-toolbar-title>Register</v-toolbar-title>    
         </v-toolbar>
 
       <div class="pl-4 pr-4 pt-2 pb-2">
-            <h1>Login</h1>
-
+            <h1>Registration</h1>
+            <v-text-field v-model="name" label="Name"></v-text-field><br><br>
             <v-text-field v-model="email" label="Email"></v-text-field><br><br>
             
           
@@ -23,23 +23,24 @@
             </select>
 
             <br><br>
-            <input v-model="password" type="password" name="password" placeholder="password"><br><br>
-            <button @click="login">Login</button>
-         
-            
+            <input v-model="password" type="password" name="password" placeholder="password"><br><br>            
+            <button @click="register">Register</button><br><br>
+            <span>Already with us? click below to</span><br>
+            <button @click="register">Login</button>      
         </div>
     </div>
 </v-flex>
       
 </v-layout>
 </template>
-<script>
 
+<script>
 import AuthenticationService from "@/services/AuthenticationService";
 export default {
   data () {
     return {
         email: "",
+        name: "",
         role: "",
         password: "",
     
@@ -48,9 +49,10 @@ export default {
   },
 
   methods: {
-      async login () {
-          const response = await AuthenticationService.login( {
+      async register () {
+          const response = await AuthenticationService.register( {
               email: this.email,
+              name: this.name,
               role: this.role,
               password: this.password
           })

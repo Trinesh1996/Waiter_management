@@ -7,8 +7,13 @@ const Pool = pg.Pool
 const axios = require('axios')
 
 
-let AdminRegistration = require("./services/adminRegistration");
-let AdminRegistrationRoutes = require("./routes/adminRegistrationRoutes");
+let AdminRegistration = require("./services/adminServices");
+let AdminRegistrationRoutes = require("./routes/adminRoutes");
+
+
+// login
+// let login = require("./services/login");
+// let loginRoute = require("./routes/loginRoute");
 // const RegistrationValidation = require("../Policies/RegistrationValidation");
 
 
@@ -28,8 +33,11 @@ const pool = new Pool({
   })
 
 
-const adminRegServices = AdminRegistration(pool);
-const adminRegRoutes = AdminRegistrationRoutes(adminRegServices);
+const adminServices = AdminRegistration(pool);
+const adminRoutes = AdminRegistrationRoutes(adminServices);
+
+// const loginPool = login(pool)
+// const loginRoutes = loginRoute(loginPool)
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -52,7 +60,9 @@ app.get('/adminlogin', (req, res) => {
 //     })
 // })
 
-app.post('/register', adminRegRoutes.registerAdmin);
+app.post('/register', adminRoutes.registerAdmin);
+app.post('/register',adminRoutes.registerStaff);
+// app.post('/login', loginRoutes.login);
    
 
 

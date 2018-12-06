@@ -1,4 +1,4 @@
-drop table if exists weekdays, users, shifts, admin;
+drop table if exists weekdays, staff, shifts, admin;
 
 create table weekdays (
     id serial not null primary key,
@@ -14,7 +14,7 @@ create table admin (
     password text not null
 );
 
-create table users (
+create table staff (
     id serial not null primary key,
     email text not null UNIQUE,
     FullName text not null,
@@ -26,7 +26,7 @@ create table shifts (
     id serial not null,
     user_id int not null,
     days_id int not NULL,
-    FOREIGN key (user_id) REFERENCES users(id),
+    FOREIGN key (user_id) REFERENCES staff(id),
     FOREIGN key (days_id) REFERENCES weekDays(id)
 );
 
