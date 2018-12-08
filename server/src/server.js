@@ -12,9 +12,9 @@ let AdminRegistrationRoutes = require("./routes/adminRoutes");
 
 
 // login
-// let login = require("./services/login");
-// let loginRoute = require("./routes/loginRoute");
-// const RegistrationValidation = require("../Policies/RegistrationValidation");
+let login = require("./services/login");
+let loginRoute = require("./routes/loginRoute");
+
 
 
 let app = express();
@@ -36,8 +36,8 @@ const pool = new Pool({
 const adminServices = AdminRegistration(pool);
 const adminRoutes = AdminRegistrationRoutes(adminServices);
 
-// const loginPool = login(pool)
-// const loginRoutes = loginRoute(loginPool)
+const loginPool = login(pool)
+const loginRoutes = loginRoute(loginPool)
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -54,15 +54,10 @@ app.get('/adminlogin', (req, res) => {
     }])   
 });
 
-// app.post('/adminregister', (req, res) => {
-//     res.send( {
-//         message: `Hello ${req.body.name}! you have been registered onto the system`
-//     })
-// })
+
 
 app.post('/register', adminRoutes.registerAdmin);
-app.post('/register',adminRoutes.registerStaff);
-// app.post('/login', loginRoutes.login);
+app.post('/login', loginRoutes.login);
    
 
 

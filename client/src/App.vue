@@ -2,6 +2,7 @@
   <div id="app">
     <v-app>
       <Page-Header />
+   
       
       <main> 
         <v-container fluid>
@@ -15,12 +16,14 @@
 <script>
 import PageHeader from '@/components/header.vue'
 
+
 export default {
   name: 'App',
   components: {
     PageHeader
   }
 }
+
 </script>
 
 <style>

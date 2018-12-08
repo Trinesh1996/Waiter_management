@@ -1,10 +1,10 @@
-module.exports = function (adminReg) {
+module.exports = function (logMe) {
 
     async function login (req, res) {  
-        let adminData = req.body;
+        const {email, role, password} = req.body;      
    
-        try {  
-            await adminReg.login(adminData.email, adminData.name, adminData.role, adminData.password);
+        try {
+            await logMe.login(email, role, password);            
             res.send( {
                 message: `Hello ${req.body.name}! you have been logged into the system`
             })
@@ -16,7 +16,4 @@ module.exports = function (adminReg) {
     return {
         login
     }
-
-
-
 }
